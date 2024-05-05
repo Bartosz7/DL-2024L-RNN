@@ -1,0 +1,47 @@
+name: ast_hyperparams
+method: bayes
+metric:
+  goal: minimize
+  name: validation_best/loss
+
+parameters:
+  dataset:
+    value: speech-waveform
+  model_name:
+    value: AST
+  model_class:
+    value: FineTunedAST
+  feature_processor:
+    value: ASTProcessor
+  batch_size:
+    value: 3
+  epochs:
+    value: 6
+  config_file:
+    value: ast-feature-extractor-config
+  model_params:
+    value:
+      - pretrained_path
+  pretrained_path:
+    value: ast-feature-extractor-config
+
+  lr:
+    distribution: log_uniform_values
+    min: 0.000001
+    max: 0.01
+  beta1:
+    distribution: log_uniform_values
+    min: 0.7
+    max: 0.99999
+  beta2:
+    distribution: log_uniform_values
+    min: 0.9
+    max: 0.999999
+  l2_penalty:
+    distribution: uniform
+    min: 0
+    max: 0.3
+  dropout:
+    distribution: uniform
+    min: 0
+    max: 0.6

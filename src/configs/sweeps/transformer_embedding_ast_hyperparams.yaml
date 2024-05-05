@@ -1,0 +1,72 @@
+name: transformer_embedding_ast_hyperparams
+method: bayes
+metric:
+  goal: minimize
+  name: validation_best/loss
+
+parameters:
+  dataset:
+    value: speech-waveform
+  model_name:
+    value: TransformerASTEmbedding
+  model_class:
+    value: TransformerASTModel
+  batch_size:
+    value: 256
+  epochs:
+    value: 30
+  scheduler_factor:
+    value: 0.5
+  scheduler_patience:
+    value: 4
+
+  config_dir:
+    value: ast-feature-extractor-config
+  max_length:
+    value: 100
+
+  feature_processor:
+    value: ASTProcessor
+  feature_processor_params:
+    value:
+      - config_dir
+      - max_length
+
+  model_params:
+    value:
+      - config_dir
+      - max_length
+      - hidden_vector_size
+      - heads_num
+      - hidden_layer_size
+      - layers_num
+      - dropout
+
+  lr:
+    distribution: log_uniform_values
+    min: 0.000001
+    max: 0.001
+  beta1:
+    distribution: log_uniform_values
+    min: 0.8
+    max: 0.9999
+  beta2:
+    distribution: log_uniform_values
+    min: 0.9
+    max: 0.999999
+  l2_penalty:
+    distribution: uniform
+    min: 0
+    max: 0.4
+  dropout:
+    distribution: uniform
+    min: 0
+    max: 0.5
+  hidden_vector_size:
+    value: 512
+  heads_num:
+    value: 4
+  hidden_layer_size:
+    value: 2048
+  layers_num:
+    value: 4
